@@ -1,0 +1,9 @@
+{
+  "name": "emilson-landing",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "test:browser": "node tools/qa-browser.js"
+  }
+}

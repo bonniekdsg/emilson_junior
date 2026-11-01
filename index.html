@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-uVYLJasvxDoGN78VWKSok8HGbbd+/dVJIt+/Y4AbpGY='; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Emilson Júnior — Pré-candidato a Vereador de Feijó</title>
+  <meta name="description" content="Emilson Júnior, pré-candidato a vereador de Feijó (AC). Diálogo, trabalho e um olhar atento para as pessoas de Feijó. Conte o que importa para você.">
+  <meta name="theme-color" content="#07af43">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Emilson Júnior">
+  <meta property="og:title" content="Emilson Júnior — Pré-candidato a Vereador de Feijó">
+  <meta property="og:description" content="Diálogo, trabalho e um olhar atento para as pessoas de Feijó.">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Liga os estados iniciais das animações só quando há JS. Se main.js não
+       sinalizar em 3s (falha de rede, erro), o conteúdo aparece sem animação.
+       Se mudar este script, recalcule o hash dele na CSP acima. -->
+  <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__ejReady)document.documentElement.classList.remove('js')},3000);</script>
+  <script src="main.js" type="module"></script>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <div class="nav-sentinel" data-nav-sentinel aria-hidden="true"></div>
+
+  <header class="nav" data-nav data-reveal="intro">
+    <div class="nav__bar" data-anim="drop" data-delay="0">
+      <div class="nav__inner">
+        <a class="nav__logo" href="#inicio" aria-label="Emilson Júnior — início">
+          <img src="img/logo-nav.svg" width="101" height="41" alt="">
+        </a>
+        <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="menu" data-nav-toggle>
+          <span class="visually-hidden">Abrir menu</span>
+          <span class="nav__toggle-bars" aria-hidden="true"></span>
+        </button>
+        <div class="nav__menu" id="menu" data-nav-menu>
+          <div class="nav__menu-inner">
+            <nav class="nav__links" aria-label="Principal">
+              <a href="#inicio">Início</a>
+              <a href="#historia">Nossa História</a>
+              <a href="#compromisso">Por uma Feijó melhor</a>
+              <a href="#contato">Contato</a>
+            </nav>
+            <a class="btn nav__cta" href="#contato" data-whatsapp>
+              Vamos conversar
+              <img class="btn__icon" src="img/whatsapp-nav.svg" width="20" height="20" alt="">
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <!-- Início -->
+    <section class="hero" id="inicio" aria-labelledby="hero-title">
+      <div class="hero__card" data-reveal="intro">
+        <picture class="card-bg" data-anim="fade" data-delay="0">
+          <source type="image/avif" srcset="img/hero-bg-800.avif 800w, img/hero-bg-1600.avif 1600w" sizes="(min-width: 1360px) 1280px, 100vw">
+          <source type="image/webp" srcset="img/hero-bg-800.webp 800w, img/hero-bg-1600.webp 1600w" sizes="(min-width: 1360px) 1280px, 100vw">
+          <img src="img/hero-bg-1600.webp" width="1600" height="800" alt="">
+        </picture>
+
+        <div class="hero__content">
+          <h1 class="hero__title" id="hero-title" data-anim="logo" data-delay="250">
+            <img class="hero__logo" src="img/logo-hero.svg" width="473" height="192" alt="Emilson Júnior">
+          </h1>
+          <div class="hero__copy">
+            <p class="hero__role" data-anim="up" data-delay="600">Pré-candidato a Vereador de Feijó</p>
+            <p class="hero__lead" data-anim="up" data-delay="760">Diálogo, trabalho e um olhar atento para as pessoas de Feijó.</p>
+          </div>
+          <div class="hero__cta" data-anim="up" data-delay="920">
+            <a class="btn btn--hero" href="#contato" data-whatsapp>
+              Vamos conversar
+              <img class="btn__icon" src="img/whatsapp-hero.svg" width="25" height="25" alt="">
+            </a>
+          </div>
+        </div>
+
+        <picture class="hero__person" data-anim="person" data-delay="350">
+          <source type="image/avif" srcset="img/hero-person-640.avif 640w, img/hero-person-1062.avif 1062w" sizes="(min-width: 1000px) 627px, 92vw">
+          <source type="image/webp" srcset="img/hero-person-640.webp 640w, img/hero-person-1062.webp 1062w" sizes="(min-width: 1000px) 627px, 92vw">
+          <img src="img/hero-person-1062.webp" width="1062" height="1126" alt="Emilson Júnior sorrindo, de camiseta branca" fetchpriority="high">
+        </picture>
+      </div>
+    </section>
+
+    <!-- Nossa história -->
+    <section class="historia" id="historia" aria-labelledby="historia-title">
+      <div class="historia__card">
+        <div class="historia__top">
+          <div class="historia__text" data-reveal>
+            <p class="eyebrow eyebrow--green" data-anim="up" data-delay="0">
+              <img src="img/line-green.svg" width="55" height="3" alt="">
+              Conheça mais
+            </p>
+            <h2 class="title" id="historia-title" data-split data-delay="140">Nossa história</h2>
+            <p class="lead" data-anim="up" data-delay="420">Emilson Júnior é um acreano que acredita no poder das pessoas, no diálogo e no trabalho coletivo para construir uma cidade mais justa, humana e com mais oportunidades para todos.</p>
+          </div>
+
+          <div class="historia__art" data-reveal>
+            <!-- O chapéu fica sobre o círculo azul: entram e flutuam juntos. -->
+            <img class="art art--h-circle" src="img/historia-vector.svg" width="158" height="158" alt="" data-anim="pop" data-delay="520">
+            <img class="art art--h-green" src="img/historia-vector1.svg" width="396" height="376" alt="" data-anim="pop" data-delay="0">
+            <img class="art art--h-corner" src="img/historia-vector2.svg" width="104" height="99" alt="" data-anim="pop" data-delay="260">
+            <img class="art art--h-cap" src="img/historia-group1.svg" width="114" height="81" alt="" data-anim="pop" data-delay="520">
+            <img class="art art--h-houses" src="img/historia-group2.svg" width="188" height="93" alt="" data-anim="pop" data-delay="400">
+            <img class="art art--h-chat" src="img/historia-group3.svg" width="140" height="105" alt="" data-anim="pop" data-delay="680">
+            <picture class="art art--h-person" data-anim="rise" data-delay="160">
+              <source type="image/avif" srcset="img/historia-person-480.avif 480w, img/historia-person-868.avif 868w" sizes="(min-width: 1000px) 434px, 70vw">
+              <source type="image/webp" srcset="img/historia-person-480.webp 480w, img/historia-person-868.webp 868w" sizes="(min-width: 1000px) 434px, 70vw">
+              <img src="img/historia-person-868.webp" width="868" height="944" alt="Emilson Júnior sorrindo, olhando para o lado" loading="lazy" decoding="async">
+            </picture>
+          </div>
+        </div>
+
+        <ul class="values" role="list" data-reveal>
+          <li class="value" data-anim="up" data-delay="0">
+            <img class="value__icon" src="img/icon-pessoas.svg" width="100" height="100" alt="">
+            <div class="value__text">
+              <h3>Pessoas em primeiro lugar</h3>
+              <p>Escuta, respeito e diálogo sempre.</p>
+            </div>
+          </li>
+          <li class="value" data-anim="up" data-delay="160">
+            <img class="value__icon" src="img/icon-compromisso.svg" width="100" height="100" alt="">
+            <div class="value__text">
+              <h3>Compromisso com Feijó</h3>
+              <p>Trabalho sério por uma cidade melhor.</p>
+            </div>
+          </li>
+          <li class="value" data-anim="up" data-delay="320">
+            <img class="value__icon" src="img/icon-oportunidades.svg" width="100" height="100" alt="">
+            <div class="value__text">
+              <h3>Juntos por mais oportunidades</h3>
+              <p>Uma cidade que valoriza sua gente.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Por uma Feijó melhor -->
+    <section class="compromisso" id="compromisso" aria-labelledby="compromisso-title">
+      <div class="compromisso__card">
+        <picture class="card-bg">
+          <source type="image/avif" srcset="img/compromisso-bg-800.avif 800w, img/compromisso-bg-1364.avif 1364w" sizes="(min-width: 1360px) 1280px, 100vw">
+          <source type="image/webp" srcset="img/compromisso-bg-800.webp 800w, img/compromisso-bg-1364.webp 1364w" sizes="(min-width: 1360px) 1280px, 100vw">
+          <img src="img/compromisso-bg-1364.webp" width="1364" height="588" alt="" loading="lazy" decoding="async">
+        </picture>
+
+        <div class="compromisso__text" data-reveal>
+          <p class="eyebrow eyebrow--yellow" data-anim="up" data-delay="0">
+            <img src="img/line-yellow.svg" width="55" height="3" alt="">
+            Meu compromisso
+          </p>
+          <h2 class="title title--light" id="compromisso-title" data-split data-delay="140">Por uma <em>Feijó</em> cada dia melhor</h2>
+          <p class="lead lead--light" data-anim="up" data-delay="560">Acreditamos em uma Feijó com mais escuta, mais oportunidades e mais qualidade de vida para as pessoas. É com diálogo e participação que podemos construir um futuro melhor para a nossa cidade.</p>
+          <div class="compromisso__cta" data-anim="up" data-delay="720">
+            <a class="btn btn--md" href="#contato" data-whatsapp>
+              Vamos conversar
+              <img class="btn__icon" src="img/whatsapp-compromisso.svg" width="22" height="22" alt="">
+            </a>
+          </div>
+        </div>
+
+        <div class="compromisso__art" data-reveal>
+          <picture class="art art--c-city" data-anim="curtain" data-delay="0">
+            <source type="image/avif" srcset="img/cidade-472.avif">
+            <img src="img/cidade-472.webp" width="472" height="720" alt="Vista aérea do centro de Feijó, com praça arborizada e quadra de esportes" loading="lazy" decoding="async">
+          </picture>
+          <img class="art art--c-shapes" src="img/compromisso-group10.svg" width="745" height="519" alt="" loading="lazy" data-anim="pop" data-delay="280">
+          <picture class="art art--c-person" data-anim="rise" data-delay="420">
+            <source type="image/avif" srcset="img/compromisso-person-600.avif 600w, img/compromisso-person-1000.avif 1000w" sizes="(min-width: 1000px) 582px, 80vw">
+            <source type="image/webp" srcset="img/compromisso-person-600.webp 600w, img/compromisso-person-1000.webp 1000w" sizes="(min-width: 1000px) 582px, 80vw">
+            <img src="img/compromisso-person-1000.webp" width="1000" height="1026" alt="Emilson Júnior sorrindo e aplaudindo" loading="lazy" decoding="async">
+          </picture>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contato -->
+    <section class="contato" id="contato" aria-labelledby="contato-title">
+      <div class="contato__card">
+        <picture class="card-bg">
+          <source type="image/avif" srcset="img/contato-bg-800.avif 800w, img/contato-bg-1304.avif 1304w" sizes="(min-width: 1360px) 1280px, 100vw">
+          <source type="image/webp" srcset="img/contato-bg-800.webp 800w, img/contato-bg-1304.webp 1304w" sizes="(min-width: 1360px) 1280px, 100vw">
+          <img src="img/contato-bg-1304.webp" width="1304" height="648" alt="" loading="lazy" decoding="async">
+        </picture>
+
+        <div class="contato__intro" data-reveal>
+          <p class="eyebrow eyebrow--yellow" data-anim="up" data-delay="0">
+            <img src="img/line-yellow.svg" width="55" height="3" alt="">
+            Sua participação importa
+          </p>
+          <h2 class="title title--light" id="contato-title" data-split data-delay="140">Sua voz faz Feijó crescer</h2>
+          <p class="lead lead--light" data-anim="up" data-delay="560">Conte o que importa para você e compartilhe suas ideias para a nossa cidade.</p>
+          <picture class="contato__balao" data-anim="pop" data-delay="720">
+            <source type="image/avif" srcset="img/balao-876.avif">
+            <img src="img/balao-876.webp" width="876" height="528" alt="" loading="lazy" decoding="async">
+          </picture>
+        </div>
+
+        <form class="form" data-form novalidate data-reveal data-anim="up" data-delay="240">
+          <div class="form__fields" data-form-fields>
+            <div class="form__pair">
+              <div class="field">
+                <label for="f-nome">Nome</label>
+                <input class="input" id="f-nome" name="nome" type="text" autocomplete="name" maxlength="120" required aria-describedby="f-nome-erro">
+                <p class="field__error" id="f-nome-erro" hidden></p>
+              </div>
+              <div class="field">
+                <label for="f-whatsapp">WhatsApp</label>
+                <input class="input" id="f-whatsapp" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel-national" maxlength="16" required aria-describedby="f-whatsapp-erro">
+                <p class="field__error" id="f-whatsapp-erro" hidden></p>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="f-bairro">Bairro ou comunidade</label>
+              <input class="input" id="f-bairro" name="bairro" type="text" maxlength="120">
+            </div>
+
+            <div class="field">
+              <label for="f-assunto">Qual assunto é mais importante para você?</label>
+              <select class="input input--select" id="f-assunto" name="assunto">
+                <option value="">Selecione um assunto</option>
+                <option>Saúde</option>
+                <option>Educação</option>
+                <option>Emprego e renda</option>
+                <option>Infraestrutura e saneamento</option>
+                <option>Segurança</option>
+                <option>Assistência social</option>
+                <option>Esporte e lazer</option>
+                <option>Cultura</option>
+                <option>Meio ambiente</option>
+                <option>Produção rural</option>
+                <option>Outro</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="f-mensagem">Quais são suas demandas e o que você espera para Feijó?</label>
+              <textarea class="input input--area" id="f-mensagem" name="mensagem" rows="3" maxlength="2000"></textarea>
+            </div>
+
+            <label class="check">
+              <input class="check__input" type="checkbox" name="novidades" value="sim">
+              <span>Quero receber novidades e atualizações sobre o trabalho de Emilson Júnior.</span>
+            </label>
+
+            <!-- Isca para robôs: invisível para pessoas e leitores de tela. -->
+            <div class="hp" aria-hidden="true">
+              <label>Deixe em branco <input type="text" name="site" tabindex="-1" autocomplete="off"></label>
+            </div>
+
+            <div class="form__submit">
+              <button class="btn btn--md btn--block" type="submit" data-form-submit>
+                <span data-form-label>Enviar minha opinião</span>
+                <img class="btn__arrow" src="img/arrow-forward.svg" width="16" height="16" alt="">
+              </button>
+              <p class="form__status" role="alert" data-form-status hidden></p>
+              <p class="form__note">Seus dados serão usados para entrar em contato e ouvir suas sugestões.</p>
+            </div>
+          </div>
+
+          <div class="form__done" data-form-done hidden>
+            <span class="form__done-mark" aria-hidden="true"></span>
+            <h3 class="form__done-title" tabindex="-1" data-form-done-title>Obrigado!</h3>
+            <p>Sua mensagem chegou. Vamos ler com atenção e falar com você pelo WhatsApp.</p>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" data-reveal data-anim="up">
+    <div class="footer__top">
+      <a class="footer__mark" href="#inicio" aria-label="Emilson Júnior — voltar ao início">
+        <img src="img/simbolo.svg" width="95" height="75" alt="">
+      </a>
+      <ul class="footer__social" role="list">
+        <li>
+          <a class="footer__icon" data-instagram aria-label="Instagram de Emilson Júnior">
+            <img src="img/icon-instagram.svg" width="42" height="42" alt="">
+          </a>
+        </li>
+        <li>
+          <a class="footer__icon" href="#contato" data-whatsapp aria-label="Conversar com Emilson Júnior pelo WhatsApp">
+            <img src="img/icon-whatsapp-footer.svg" width="42" height="42" alt="">
+          </a>
+        </li>
+      </ul>
+    </div>
+    <img class="footer__rule" src="img/line-footer.svg" width="1184" height="1" alt="">
+    <div class="footer__bottom">
+      <p>Emilson Júnior · Pré-candidato a vereador de Feijó, Acre</p>
+      <p class="footer__motto">
+        Uma Feijó melhor se constrói com pessoas.
+        <img src="img/faixa-cores.svg" width="72" height="15" alt="">
+      </p>
+    </div>
+  </footer>
+</body>
+</html>

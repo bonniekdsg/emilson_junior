@@ -1,0 +1,1070 @@
+/* ==========================================================================
+   Emilson Júnior — landing
+   Fonte de verdade visual: Figma Ggh9ySr2I52ByYtFSRWbYE, node 1:3.
+   Frame de 1920px, conteúdo de 1280px.
+
+   Cada seção é um container (container-type: inline-size). Dentro dos cards,
+   medidas em cqi são "px do design ÷ 1280 × 100": a composição inteira
+   escala junto até o breakpoint em que vira coluna. As peças das ilustrações
+   ficam em % da caixa de arte, calculadas a partir das coordenadas do Figma.
+   ========================================================================== */
+
+@font-face {
+  font-family: "Inter";
+  src: url("fonts/inter-latin.woff2") format("woff2");
+  font-weight: 400 800;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Instrument Sans";
+  src: url("fonts/instrument-sans-latin.woff2") format("woff2");
+  font-weight: 400 700;
+  font-stretch: 75% 100%;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  --green: #07af43;
+  --yellow: #fec602;
+  --yellow-hover: #ffcf26;
+  --navy: #003658;
+  --ink: #484848;
+  --bg: #f8fafd;
+  --paper: #fff;
+  --line: #d9d9d9;
+  --muted: #a8a8a8;
+  --danger: #c4231b;
+
+  --radius: 20px;
+  --gutter: clamp(16px, 4vw, 40px);
+  --content: 1280px;
+
+  --font-display: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-ui: "Instrument Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* Interações (hover, menu): resposta imediata, chegada longa. */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  /* Entradas: cubic-out desloca de forma contínua, sem o "salto" inicial do
+     expo; a opacidade usa sine in-out para o elemento surgir, não piscar. */
+  --ease-glide: cubic-bezier(0.33, 1, 0.68, 1);
+  --ease-fade: cubic-bezier(0.37, 0, 0.63, 1);
+  /* Cortina da foto: acelera e desacelera, como um pano sendo puxado. */
+  --ease-curtain: cubic-bezier(0.65, 0, 0.35, 1);
+
+  color-scheme: light;
+}
+
+/* ---------- Base ---------- */
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--navy);
+  font-family: var(--font-ui);
+  font-size: 16px;
+  line-height: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, p { margin: 0; }
+img { display: block; max-width: 100%; height: auto; }
+picture { display: block; }
+a { color: inherit; }
+
+:focus-visible {
+  outline: 2px solid var(--navy);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--gutter);
+  top: -100px;
+  z-index: 100;
+  padding: 10px 16px;
+  border-radius: 12px;
+  background: var(--navy);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+}
+.skip-link:focus { top: 12px; }
+
+.hero,
+.historia,
+.compromisso,
+.contato {
+  width: min(var(--content), 100% - 2 * var(--gutter));
+  margin-inline: auto;
+  scroll-margin-top: 120px;
+}
+
+/* Fundo ilustrado dos cards: recortado pelo raio, atrás do conteúdo. */
+.card-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  border-radius: inherit;
+}
+.card-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---------- Tipografia ---------- */
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font: 700 12px/19px var(--font-display);
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+.eyebrow img { flex: none; width: 55px; height: 3px; }
+.eyebrow--green { color: var(--green); }
+.eyebrow--yellow { color: var(--yellow); }
+
+.title {
+  margin-top: 15px;
+  font: 800 clamp(2.5rem, 5cqi, 4rem) / 1.2 var(--font-display); /* 64px */
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.title--light { color: #fff; }
+.title em { font-style: normal; color: var(--yellow); }
+
+.lead {
+  margin-top: 15px;
+  font: 400 clamp(1rem, 1.406cqi, 1.125rem) / 1.21 var(--font-display); /* 18px, lh normal */
+  letter-spacing: -0.02em;
+  color: var(--navy);
+  text-wrap: pretty;
+}
+.lead--light { color: #fff; }
+
+/* ---------- Botão ----------
+   No Figma o botão é proporcional ao corpo em todos os tamanhos
+   (16 / 17.6 / 19.636px): padding .75em 1.25em, gap .625em, raio 1.25em,
+   ícone 1.25em. Por isso tudo aqui é em em. */
+
+.btn {
+  --btn-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625em;
+  padding: 0.75em 1.25em;
+  border: 0;
+  border-radius: 1.25em;
+  background: var(--yellow);
+  color: #fff;
+  font: 600 var(--btn-size) / normal var(--font-ui);
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    transform 0.45s var(--ease-out),
+    background-color 0.2s ease,
+    box-shadow 0.45s var(--ease-out);
+}
+.btn:hover {
+  background: var(--yellow-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px -12px rgb(166 120 0 / 0.6);
+}
+.btn:active {
+  transform: translateY(0) scale(0.98);
+  transition-duration: 0.12s;
+}
+.btn__icon { flex: none; width: 1.25em; height: 1.25em; }
+.btn__arrow {
+  flex: none;
+  width: 0.9091em; /* 16 / 17.6 */
+  height: 0.9091em;
+  transition: transform 0.45s var(--ease-out);
+}
+.btn:hover .btn__arrow { transform: translateX(3px); }
+
+.btn--md { --btn-size: 17.6px; }
+.btn--block { width: 100%; }
+.btn[aria-busy="true"] { cursor: progress; opacity: 0.85; }
+
+/* ---------- Navegação ---------- */
+
+.nav-sentinel {
+  position: absolute;
+  top: 0;
+  height: 40px;
+  width: 1px;
+}
+
+.nav {
+  position: sticky;
+  top: max(12px, env(safe-area-inset-top));
+  z-index: 50;
+  margin-top: 36px;
+}
+
+.nav__bar {
+  container: nav / inline-size;
+  width: min(var(--content), 100% - 2 * var(--gutter));
+  margin-inline: auto;
+  border-radius: var(--radius);
+  background: var(--green);
+  transition: box-shadow 0.5s var(--ease-out);
+}
+.nav.is-stuck .nav__bar {
+  box-shadow:
+    0 18px 40px -18px rgb(0 54 88 / 0.45),
+    0 2px 6px rgb(0 54 88 / 0.08);
+}
+
+.nav__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 89px;
+  padding: 12px clamp(20px, 6.875cqi, 88px);
+}
+
+.nav__logo {
+  flex: none;
+  border-radius: 8px;
+}
+.nav__logo img { width: 101px; height: auto; }
+
+.nav__menu,
+.nav__menu-inner { display: contents; }
+
+.nav__links {
+  display: flex;
+  gap: 26px;
+  padding: 10px;
+}
+.nav__links a {
+  position: relative;
+  padding: 10px;
+  color: #fff;
+  font: 600 14px/17px var(--font-ui);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.nav__links a::after {
+  content: "";
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 4px;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s var(--ease-out);
+}
+.nav__links a:hover::after,
+.nav__links a[aria-current]::after { transform: scaleX(1); }
+.nav__links a:focus-visible { outline-color: #fff; }
+
+.nav__cta:focus-visible,
+.nav__logo:focus-visible,
+.nav__toggle:focus-visible { outline-color: #fff; }
+
+.nav__toggle {
+  display: none;
+  position: relative;
+  width: 44px;
+  height: 44px;
+  margin-right: -10px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+.nav__toggle-bars,
+.nav__toggle-bars::before {
+  position: absolute;
+  left: 11px;
+  width: 22px;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+  transition: transform 0.4s var(--ease-out), top 0.4s var(--ease-out);
+}
+.nav__toggle-bars { top: 17px; }
+.nav__toggle-bars::before { content: ""; left: 0; top: 8px; }
+.nav__toggle[aria-expanded="true"] .nav__toggle-bars { top: 21px; transform: rotate(45deg); }
+.nav__toggle[aria-expanded="true"] .nav__toggle-bars::before { top: 0; transform: rotate(-90deg); }
+
+@container nav (width < 900px) {
+  .nav__inner { min-height: 72px; }
+  .nav__toggle { display: block; }
+
+  .nav__menu {
+    display: grid;
+    flex-basis: 100%;
+    grid-template-rows: 1fr;
+  }
+  .nav__menu-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-height: 0;
+    padding-bottom: 12px;
+  }
+  .nav__links {
+    flex-direction: column;
+    gap: 0;
+    padding: 4px 0 0;
+  }
+  .nav__links a {
+    padding: 14px 0;
+    font-size: 17px;
+    border-bottom: 1px solid rgb(255 255 255 / 0.18);
+  }
+  .nav__links a::after { left: 0; right: auto; width: 32px; bottom: 8px; }
+  .nav__cta { align-self: stretch; }
+
+  /* Fechado só quando há JS para abrir. */
+  .js .nav__menu {
+    grid-template-rows: 0fr;
+    visibility: hidden;
+    transition: grid-template-rows 0.5s var(--ease-out), visibility 0s linear 0.5s;
+  }
+  .js .nav__menu-inner { overflow: hidden; }
+  .js .nav.is-open .nav__menu {
+    grid-template-rows: 1fr;
+    visibility: visible;
+    transition: grid-template-rows 0.5s var(--ease-out), visibility 0s;
+  }
+}
+
+/* ---------- Início ---------- */
+
+.hero {
+  container: hero / inline-size;
+  margin-top: 30px;
+}
+
+.hero__card {
+  position: relative;
+  isolation: isolate;
+  min-height: 50.39cqi; /* 645 */
+  padding: 8.203cqi 0 7.109cqi 7.734cqi; /* 105 · 91 · 99 */
+  border-radius: var(--radius);
+}
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 36.953cqi; /* 473 */
+  text-align: center;
+}
+
+.hero__title { width: 100%; }
+.hero__logo { width: 100%; }
+
+.hero__copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  margin-top: 1.5625cqi; /* 20 */
+}
+
+.hero__role {
+  font: 800 clamp(1.625rem, 3.125cqi, 2.5rem) / 1.2 var(--font-display);
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.hero__lead {
+  max-width: 68.3%; /* 323 / 473 */
+  font: 400 clamp(1rem, 1.588cqi, 1.27rem) / 1.4545 var(--font-display); /* 20.324px, lh 29.562 */
+  letter-spacing: -0.02em;
+  color: var(--navy);
+  text-wrap: balance;
+}
+
+.hero__cta { margin-top: 1.719cqi; } /* 22 */
+.btn--hero { --btn-size: clamp(16px, 1.534cqi, 19.636px); }
+
+/* 627×665 a 536px da esquerda, 20px acima do card, encostada na base. */
+.hero__person {
+  position: absolute;
+  z-index: 1;
+  right: 9.141%;
+  bottom: 0;
+  width: 48.984%;
+}
+
+@container hero (width < 960px) {
+  .hero__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 0;
+    padding: clamp(36px, 8cqi, 64px) 20px 0;
+  }
+  .hero__content { width: min(100%, 473px); }
+  .hero__logo { width: min(100%, 380px); margin-inline: auto; }
+  .hero__copy { margin-top: 18px; }
+  .hero__role { font-size: clamp(1.625rem, 1.1rem + 2.6cqi, 2.25rem); }
+  .hero__lead { max-width: 340px; font-size: 1.0625rem; }
+  .hero__cta { margin-top: 22px; }
+  .btn--hero { --btn-size: 17.6px; }
+  .hero__person {
+    position: relative;
+    right: auto;
+    width: min(92%, 480px);
+    margin-top: 28px;
+  }
+  /* Em coluna, o texto fica no branco do fundo e as formas coloridas (o lado
+     direito da arte) só atrás da foto, entrando por um degradê. */
+  .hero__card { background: #fcfdfe; }
+  .hero__card .card-bg {
+    top: auto;
+    height: 54%;
+    mask-image: linear-gradient(to bottom, transparent, #000 32%);
+  }
+  .hero__card .card-bg img { object-position: 100% 50%; }
+}
+
+/* ---------- Nossa história ---------- */
+
+.historia {
+  container: historia / inline-size;
+  margin-top: 43px;
+}
+
+.historia__card {
+  padding-bottom: 3.203cqi; /* 41 */
+  border-radius: var(--radius);
+  background: var(--paper);
+}
+
+.historia__top {
+  display: grid;
+  grid-template-columns: 38.984cqi 1fr; /* 499 | 640 */
+  column-gap: 1.641cqi; /* 21 */
+  align-items: start;
+  padding: 3.359cqi 2.5cqi 0 6.875cqi; /* 43 · 32 · 88 */
+}
+
+.historia__text .lead { max-width: 93.8%; } /* 468 / 499 */
+
+/* Caixa de arte: 640×483.46, começando 43px acima do card. As peças abaixo
+   são % dessa caixa (coordenadas do Figma relativas a x=608, y=-43). */
+.historia__art {
+  position: relative;
+  aspect-ratio: 640 / 483.46;
+  margin-top: -6.719cqi; /* -86 */
+}
+
+.art { position: absolute; max-width: none; }
+.art > img { width: 100%; height: 100%; }
+
+.art--h-circle { left: 68.516%; top: 41.834%; width: 24.738%; }
+.art--h-green  { left: 8.488%;  top: 17.788%; width: 61.931%; transform-origin: 0 100%; }
+.art--h-corner { left: 83.739%; top: 17.788%; width: 16.261%; transform: scaleX(-1); }
+.art--h-cap    { left: 72.147%; top: 50.376%; width: 17.865%; }
+.art--h-houses { left: 53.264%; top: 18.941%; width: 29.326%; transform-origin: 50% 100%; }
+.art--h-chat   { left: 75.008%; top: 78.215%; width: 21.887%; transform-origin: 0 100%; }
+.art--h-person { left: 0; top: 0; width: 67.813%; }
+
+/* A arte termina em y=440 e os cards começam em 438: encostam. */
+.values {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 343px));
+  justify-content: center;
+  gap: clamp(16px, 4.297cqi, 55px);
+  margin: 0;
+  padding: 0 20px;
+  list-style: none;
+}
+
+.value {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 3.125cqi, 40px);
+  min-height: 161px;
+  padding: 30px 16px;
+  border-radius: var(--radius);
+  background: var(--bg);
+  box-shadow:
+    0 17px 3.5px rgb(0 0 0 / 0.01),
+    0 10px 3px rgb(0 0 0 / 0.03),
+    0 4px 2px rgb(0 0 0 / 0.04),
+    0 1px 1px rgb(0 0 0 / 0.05);
+  transition: transform 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out);
+}
+.value:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 24px 32px -16px rgb(0 54 88 / 0.18),
+    0 4px 2px rgb(0 0 0 / 0.04),
+    0 1px 1px rgb(0 0 0 / 0.05);
+}
+
+.value__icon {
+  flex: none;
+  width: clamp(64px, 7.8125cqi, 100px);
+  height: auto;
+}
+
+.value__text {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  min-width: 0;
+  color: var(--navy);
+}
+.value__text h3 {
+  max-width: 199px;
+  font: 600 clamp(1.125rem, 1.719cqi, 1.375rem) / normal var(--font-ui);
+}
+.value__text p {
+  max-width: 153px;
+  font: 400 14px / normal var(--font-ui);
+}
+
+@container historia (width < 960px) {
+  .historia__card { padding-bottom: 24px; }
+  .historia__top {
+    grid-template-columns: 1fr;
+    padding: clamp(32px, 6cqi, 48px) 20px 0;
+  }
+  .historia__text .lead { max-width: 34em; }
+  .historia__art {
+    width: min(100%, 560px);
+    margin: 28px auto 0;
+  }
+  .values {
+    grid-template-columns: minmax(0, 420px);
+    gap: 16px;
+    margin-top: 28px;
+  }
+  .value { min-height: 0; padding: 24px 20px; gap: 24px; }
+  .value__icon { width: 72px; }
+  .value__text h3 { max-width: none; font-size: 1.25rem; }
+  .value__text p { max-width: none; }
+}
+
+/* ---------- Por uma Feijó melhor ---------- */
+
+.compromisso {
+  container: compromisso / inline-size;
+  margin-top: 45px;
+}
+
+.compromisso__card {
+  position: relative;
+  isolation: isolate;
+  min-height: 43.125cqi; /* 552 */
+  padding: 3.359cqi 0 4.766cqi 4.141cqi; /* 43 · 61 · 53 */
+  border-radius: var(--radius);
+}
+
+.compromisso__text {
+  position: relative;
+  z-index: 2;
+  width: 38.984cqi; /* 499 */
+}
+.compromisso__text .lead { max-width: 88.2%; } /* 440 / 499 */
+.compromisso__cta { margin-top: 4.922cqi; } /* 63 */
+
+/* Caixa de arte: 757×597 a 515px da esquerda, 45px acima do card. */
+.compromisso__art {
+  position: absolute;
+  z-index: 1;
+  right: 0.625%;
+  bottom: 0;
+  width: 59.141%;
+  aspect-ratio: 757 / 597;
+}
+.art--c-city {
+  left: 48.613%;
+  top: 13.065%;
+  width: 48.085%;
+  height: 81.407%;
+  overflow: hidden;
+  --r: 18px;
+  border-radius: var(--r);
+}
+.art--c-city img { object-fit: cover; }
+.art--c-shapes { left: 1.585%; top: 13.065%; width: 98.415%; }
+.art--c-person { left: 0; top: 0; width: 76.882%; }
+
+@container compromisso (width < 960px) {
+  .compromisso__card {
+    min-height: 0;
+    padding: clamp(32px, 6cqi, 48px) 20px 0;
+  }
+  .compromisso__text { width: auto; }
+  .compromisso__text .lead { max-width: 34em; }
+  .compromisso__cta { margin-top: 28px; }
+  .compromisso__art {
+    position: relative;
+    right: auto;
+    width: min(100%, 600px);
+    margin: 32px auto 0;
+  }
+  .art--c-city { --r: 14px; }
+}
+
+/* ---------- Contato ---------- */
+
+.contato {
+  container: contato / inline-size;
+  margin-top: 34px;
+}
+
+.contato__card {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: 38.984cqi 52.344cqi; /* 499 | 670 */
+  column-gap: 1.094cqi; /* 14 */
+  align-items: center;
+  padding: 2.1875cqi 0 2.1875cqi 4.141cqi; /* 28 · 53 */
+  border-radius: var(--radius);
+}
+
+.contato__intro .lead { max-width: 75.351%; } /* 376 / 499 */
+.contato__balao {
+  width: 87.776%; /* 438 / 499 */
+  margin-top: 15px;
+}
+
+@container contato (width < 1040px) {
+  .contato__card {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 8px;
+    padding: clamp(32px, 6cqi, 48px) 20px 20px;
+  }
+  .contato__intro .lead { max-width: 30em; }
+  .contato__balao { width: min(62%, 320px); margin-top: 8px; }
+}
+
+/* ---------- Formulário ---------- */
+
+.form {
+  position: relative;
+  min-height: 579px;
+  padding: 22px 23px 26px;
+  border-radius: var(--radius);
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow:
+    0 18px 41px rgb(0 0 0 / 0.1),
+    0 74px 74px rgb(0 0 0 / 0.09),
+    0 166px 99px rgb(0 0 0 / 0.05),
+    0 295px 118px rgb(0 0 0 / 0.01);
+}
+
+.form__fields {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form__pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px 27px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+.field label,
+.check {
+  font: 600 14px / 1.3 var(--font-display);
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.input {
+  width: 100%;
+  height: 41px;
+  padding: 0 14px;
+  border: 1.5px solid var(--line);
+  border-radius: 15px;
+  background: var(--paper);
+  color: var(--navy);
+  font: 400 16px / 1.4 var(--font-display); /* 16px evita zoom no iOS */
+  letter-spacing: -0.01em;
+  transition: border-color 0.2s ease, box-shadow 0.3s var(--ease-out);
+}
+.input:hover { border-color: #c4c4c4; }
+.input:focus-visible {
+  outline: none;
+  border-color: var(--green);
+  box-shadow: 0 0 0 4px rgb(7 175 67 / 0.16);
+}
+.input[aria-invalid="true"] { border-color: var(--danger); }
+.input[aria-invalid="true"]:focus-visible { box-shadow: 0 0 0 4px rgb(196 35 27 / 0.14); }
+
+.input--area {
+  height: 95px;
+  min-height: 95px;
+  padding: 10px 14px;
+  resize: vertical;
+}
+
+.input--select {
+  padding-right: 40px;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23484848' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  cursor: pointer;
+}
+.input--select:has(option[value=""]:checked) { color: #8a8a8a; }
+.input--select option { color: var(--navy); }
+
+.field__error {
+  font: 500 13px / 1.3 var(--font-display);
+  color: var(--danger);
+}
+
+.check {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  cursor: pointer;
+}
+.check span { padding-top: 3px; }
+.check__input {
+  flex: none;
+  width: 24px;
+  height: 23px;
+  margin: 0;
+  border: 1.5px solid var(--line);
+  border-radius: 6px;
+  background: var(--paper) no-repeat center / 12px 9px;
+  appearance: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+.check__input:checked {
+  border-color: var(--green);
+  background-color: var(--green);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='9' viewBox='0 0 12 9'%3E%3Cpath d='M1 4.5l3.5 3.5L11 1' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+.check__input:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgb(7 175 67 / 0.16);
+  border-color: var(--green);
+}
+
+.hp {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.form__submit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.form__status {
+  font: 500 14px / 1.4 var(--font-display);
+  color: var(--danger);
+  text-align: center;
+}
+
+.form__note {
+  font: 600 14px / 1.4 var(--font-display);
+  letter-spacing: -0.02em;
+  color: var(--muted);
+  text-align: center;
+}
+
+.form__done {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 531px;
+  padding: 24px;
+  text-align: center;
+  color: var(--navy);
+  font: 400 17px / 1.5 var(--font-display);
+}
+.form__done[hidden] { display: none; }
+.form__done-title {
+  font: 800 2rem / 1.2 var(--font-display);
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.form__done-title:focus { outline: none; }
+.form__done-mark {
+  width: 72px;
+  height: 72px;
+  margin-bottom: 8px;
+  border-radius: 50%;
+  background: var(--green) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='22' viewBox='0 0 30 22'%3E%3Cpath d='M2.5 11.5l8.5 8L27.5 2.5' fill='none' stroke='%23fff' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center;
+}
+
+@container contato (width < 1040px) {
+  .form { min-height: 0; }
+  .form__done { min-height: 360px; }
+}
+@container contato (width < 560px) {
+  .form { padding: 22px 18px 24px; }
+  .form__pair { grid-template-columns: 1fr; }
+}
+
+/* ---------- Rodapé ---------- */
+
+.footer {
+  width: min(var(--content), 100% - 2 * var(--gutter));
+  margin: 43px auto calc(40px + env(safe-area-inset-bottom));
+  padding: 29px 44px 14px 52px;
+  border: 1px solid #d0d0d0;
+  border-radius: var(--radius);
+  background: var(--paper);
+  color: var(--ink);
+  font: 500 12px / normal var(--font-ui);
+}
+
+.footer__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.footer__mark { flex: none; border-radius: 12px; }
+.footer__mark img { width: 95px; }
+
+.footer__social {
+  display: flex;
+  gap: 25.455px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.footer__icon {
+  display: block;
+  border-radius: 50%;
+  transition: transform 0.45s var(--ease-out);
+}
+.footer__icon[href]:hover { transform: translateY(-3px); }
+.footer__icon img { width: 42px; height: 42px; }
+
+.footer__rule {
+  width: 100%;
+  height: 1px;
+  margin-top: 22px;
+}
+
+.footer__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 24px;
+  min-height: 37px;
+  margin-top: 22px;
+}
+.footer__motto {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.footer__motto img { flex: none; width: 72px; height: 15px; }
+
+@media (width < 720px) {
+  .footer { padding: 24px 20px 20px; margin-top: 20px; }
+  .footer__mark img { width: 76px; }
+  .footer__bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 18px;
+  }
+}
+
+/* ---------- Mobile: respiro entre os cards ---------- */
+
+@media (width < 720px) {
+  .nav { margin-top: 16px; }
+  .hero { margin-top: 20px; }
+  .historia,
+  .compromisso,
+  .contato { margin-top: 20px; }
+  .btn:hover { transform: none; }
+}
+
+/* ==========================================================================
+   Movimento
+   Duas camadas:
+   1. Entrada: [data-reveal] é o gatilho (ganha .is-in ao entrar na tela, ou
+      na abertura, para "intro"); cada [data-anim] dentro dele entra com o
+      próprio atraso (--d). Títulos [data-split] sobem palavra por palavra.
+   2. Rolagem contínua: fundos e foto da cidade com parallax ligado ao scroll
+      (animation-timeline), rodando fora da thread principal.
+
+   Estados iniciais só existem com JS (.js) e sem preferência por menos
+   movimento. A entrada usa as propriedades individuais translate/scale/
+   opacity; o parallax usa transform. Assim as camadas se somam sem brigar,
+   e não brigam com o transform do hover e do espelhamento de peças.
+   ========================================================================== */
+
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-anim] {
+    opacity: 0;
+    transition:
+      opacity var(--fade, 1.1s) var(--ease-fade) var(--d, 0ms),
+      translate var(--move, 1.5s) var(--ease-glide) var(--d, 0ms),
+      scale var(--move, 1.5s) var(--ease-glide) var(--d, 0ms),
+      clip-path var(--move, 1.5s) var(--clip-ease, var(--ease-curtain)) var(--d, 0ms),
+      /* hover dos cards e botões continua com a resposta rápida */
+      transform 0.5s var(--ease-out),
+      box-shadow 0.5s var(--ease-out);
+  }
+
+  /* Vocabulário de entradas */
+  .js [data-anim="up"]     { translate: 0 36px; }
+  .js [data-anim="drop"]   { translate: 0 -18px; --move: 1.3s; }
+  .js [data-anim="fade"]   { --fade: 1.8s; }
+  .js [data-anim="logo"]   { translate: 0 24px; scale: 0.96; --move: 1.9s; --fade: 1.4s; }
+  /* Fotos: a pessoa nasce de dentro do card. A base da foto é recortada pela
+     mesma distância do deslocamento, com a mesma curva e duração, então a
+     borda inferior fica parada na base do card enquanto o corpo sobe. O fade
+     é curto: um fade longo deixaria a pessoa translúcida sobre as formas. */
+  .js :is([data-anim="person"], [data-anim="rise"]) {
+    translate: 0 var(--rise);
+    clip-path: inset(0 0 var(--rise) 0);
+    --clip-ease: var(--ease-glide);
+    --fade: 0.7s;
+  }
+  .js [data-anim="person"] { --rise: 96px; --move: 2.1s; }
+  .js [data-anim="rise"]   { --rise: 72px; --move: 1.9s; }
+  .js [data-anim="pop"]    { translate: 0 20px; scale: 0.86; --move: 1.7s; --fade: 1.2s; }
+  .js [data-anim="curtain"] {
+    opacity: 1;
+    clip-path: inset(100% 0 0 0 round var(--r, 0px));
+    --move: 1.7s;
+  }
+
+  .is-in[data-anim],
+  .is-in [data-anim] {
+    opacity: 1;
+    translate: none;
+    scale: none;
+  }
+  .is-in [data-anim="curtain"] { clip-path: inset(0 round var(--r, 0px)); }
+  .is-in :is([data-anim="person"], [data-anim="rise"]) { clip-path: inset(0); }
+
+  /* Títulos: cada palavra sobe de dentro de uma máscara, em cascata. A
+     folga vertical da máscara evita cortar acentos e descendentes (j, ç). */
+  .js [data-split] .w {
+    display: inline-block;
+    overflow: hidden;
+    padding-block: 0.12em;
+    margin-block: -0.12em;
+    vertical-align: top;
+  }
+  .js [data-split] .w-i {
+    display: inline-block;
+    translate: 0 108%;
+    transition: translate 1.3s var(--ease-glide) calc(var(--d, 0ms) + var(--i, 0) * 75ms);
+  }
+  .is-in [data-split] .w-i { translate: none; }
+
+  /* Respiração discreta depois que a cena assenta. Círculo e chapéu formam
+     um selo: mesma duração e atraso, para flutuarem juntos. */
+  .historia__art.is-in :is(.art--h-circle, .art--h-cap) {
+    animation: float 7s ease-in-out 2.8s infinite alternate;
+  }
+  .historia__art.is-in .art--h-chat {
+    animation: float 6s ease-in-out 3.4s infinite alternate;
+  }
+}
+
+@keyframes float {
+  from { translate: 0 0; }
+  to { translate: 0 -8px; }
+}
+
+/* Parallax ligado à rolagem: o fundo anda mais devagar que o card, dando
+   profundidade. Só onde a imagem está recortada (card ou moldura da foto),
+   para nunca expor borda. A escala dá a folga que o deslocamento consome
+   (6% de cada lado contra 5% de deslocamento). Navegadores sem scroll
+   timeline ficam com a imagem parada, exatamente como no design. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .card-bg img,
+    .art--c-city img {
+      scale: 1.12;
+      animation: drift linear both;
+      animation-timeline: view();
+    }
+    .contato__balao img {
+      animation: bob linear both;
+      animation-timeline: view();
+    }
+  }
+}
+
+@keyframes drift {
+  from { transform: translateY(-5%); }
+  to { transform: translateY(5%); }
+}
+
+@keyframes bob {
+  from { transform: translateY(28px) rotate(-1.5deg); }
+  to { transform: translateY(-28px) rotate(1.5deg); }
+}

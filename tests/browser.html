@@ -1,0 +1,102 @@
+<!doctype html>
+<meta charset="utf-8">
+<iframe id="f" src="/" style="width:390px;height:800px;border:0"></iframe>
+<pre id="out">rodando</pre>
+<script type="module">
+const out = document.getElementById("out");
+const log = [];
+const ok = (cond, msg) => log.push(`${cond ? "PASS" : "FAIL"} ${msg}`);
+const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+const f = document.getElementById("f");
+if (f.contentDocument?.readyState !== "complete" || f.contentWindow.location.href === "about:blank") {
+  await new Promise((r) => f.addEventListener("load", r, { once: true }));
+}
+await wait(1500);
+const w = f.contentWindow, d = f.contentDocument;
+const errors = [];
+w.addEventListener("error", (e) => errors.push(e.message));
+
+ok(w.__ejReady === true, "main.js carregou");
+ok(d.documentElement.classList.contains("js"), "html.js presente");
+
+// Imagens
+const broken = [...d.images].filter((i) => i.complete && i.naturalWidth === 0 && i.loading !== "lazy").map((i) => i.currentSrc || i.src);
+ok(broken.length === 0, `imagens eager carregadas ${broken.join(", ")}`);
+
+// Overflow horizontal
+ok(d.documentElement.scrollWidth <= 390, `sem overflow horizontal (scrollWidth=${d.documentElement.scrollWidth})`);
+
+// Menu
+const toggle = d.querySelector("[data-nav-toggle]");
+const menu = d.querySelector("[data-nav-menu]");
+ok(w.getComputedStyle(menu).visibility === "hidden", "menu fechado no início");
+toggle.click(); await wait(600);
+ok(toggle.getAttribute("aria-expanded") === "true" && w.getComputedStyle(menu).visibility === "visible", "menu abre");
+d.dispatchEvent(new w.KeyboardEvent("keydown", { key: "Escape" })); await wait(600);
+ok(toggle.getAttribute("aria-expanded") === "false", "Esc fecha o menu");
+ok(d.activeElement === toggle, "foco volta ao botão");
+
+// Formulário: envio vazio
+const form = d.querySelector("[data-form]");
+form.requestSubmit(); await wait(50);
+ok(form.elements.nome.getAttribute("aria-invalid") === "true", "nome inválido marcado");
+ok(!d.getElementById("f-nome-erro").hidden, "mensagem de erro do nome visível");
+ok(d.activeElement === form.elements.nome, "foco vai ao primeiro inválido");
+
+// Máscara
+const tel = form.elements.whatsapp;
+tel.focus();
+for (const ch of "68999991234") {
+  tel.value += ch; tel.setSelectionRange(tel.value.length, tel.value.length);
+  tel.dispatchEvent(new w.InputEvent("input", { bubbles: true, inputType: "insertText", data: ch }));
+}
+ok(tel.value === "(68) 99999-1234", `máscara: ${tel.value}`);
+// Backspace sobre o hífen apaga o dígito anterior
+tel.value = "(68) 9999-9"; tel.setSelectionRange(9, 9);
+tel.dispatchEvent(new w.InputEvent("input", { bubbles: true, inputType: "insertText" }));
+const before = tel.value; // "(68) 9999-9"
+tel.value = "(68) 99999"; tel.setSelectionRange(9, 9);
+tel.dispatchEvent(new w.InputEvent("input", { bubbles: true, inputType: "deleteContentBackward" }));
+ok(tel.value === "(68) 9999" , `backspace no hífen: "${before}" → "${tel.value}"`);
+
+// Validação ao vivo some quando corrige
+form.elements.nome.value = "Maria Silva";
+tel.value = "(68) 99999-1234";
+form.dispatchEvent(new w.Event("input", { bubbles: true }));
+ok(!form.elements.nome.hasAttribute("aria-invalid") && !tel.hasAttribute("aria-invalid"), "erros somem ao corrigir");
+
+// Envio sem endpoint: erro honesto
+form.requestSubmit(); await wait(200);
+const status = d.querySelector("[data-form-status]");
+ok(!status.hidden && /Não foi possível/.test(status.textContent), "sem endpoint mostra erro");
+ok(!d.querySelector("[data-form-done]").hidden === false, "não finge sucesso");
+ok(!d.querySelector("[data-form-submit]").hasAttribute("aria-busy"), "botão volta ao normal");
+
+// Isca preenchida: finge sucesso sem enviar
+form.elements.site.value = "spam";
+form.requestSubmit(); await wait(100);
+ok(!d.querySelector("[data-form-done]").hidden, "honeypot: tela de obrigado");
+ok(d.querySelector("[data-form-done-title]").textContent === "Obrigado, Maria!", "obrigado personalizado");
+
+// Movimento: abertura, títulos divididos e revelação ao rolar
+ok(d.querySelector(".hero__card").classList.contains("is-in"), "abertura revelou o hero");
+const h2 = d.getElementById("compromisso-title");
+ok(h2.querySelector(".visually-hidden")?.textContent === "Por uma Feijó cada dia melhor", "título dividido mantém a frase para leitor de tela");
+ok(h2.querySelector("em .w-i")?.textContent === "Feijó", "palavra em destaque continua dentro do <em>");
+ok(h2.querySelectorAll('[aria-hidden="true"] .w').length === 6, "uma máscara por palavra");
+
+// Rola até o fim em passos, como uma pessoa, e espera as entradas.
+for (let y = 0; y <= d.documentElement.scrollHeight; y += 300) {
+  w.scrollTo(0, y);
+  await wait(120);
+}
+await wait(3200);
+const hidden = [...d.querySelectorAll("[data-anim]")].filter((el) => w.getComputedStyle(el).opacity !== "1");
+ok(hidden.length === 0, `tudo visível depois de rolar ${hidden.map((el) => el.className).join(", ")}`);
+const pending = [...d.querySelectorAll("[data-reveal]")].filter((el) => !el.classList.contains("is-in"));
+ok(pending.length === 0, `todos os gatilhos dispararam ${pending.map((el) => el.className).join(", ")}`);
+
+ok(errors.length === 0, `sem erros JS ${errors.join(" | ")}`);
+out.textContent = log.join("\n");
+out.dataset.done = "1";
+</script>
